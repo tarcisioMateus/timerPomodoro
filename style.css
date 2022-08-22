@@ -1,0 +1,542 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    font-size: 62.5%;
+
+    --hue: 240;
+    --saturation: 6%;
+    --lightness: 21%;
+    --c-1st: hsl(var(--hue), var(--saturation), var(--lightness));
+    --c-2nd: hsl( calc(var(--hue) - 60), 0%, 100%);
+
+    --contrasted-lightness: 89%;
+    --button-bgc: hsl(var(--hue), 10%, var(--contrasted-lightness));
+
+    --ff: 'Roboto', sans-serif;
+    --ff-settings: 'Mulish', sans-serif;
+    --fs-settings: 2.4rem;
+    --br: 2.4rem;
+    --settings-gap: 3.6rem;
+}
+
+
+
+
+svg path {
+    fill: var(--c-1st);
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+
+
+
+input[type = range] {
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+    border-radius: var(--br);
+}
+input[type = range]::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    width: 0.5rem;
+    height: 1rem;
+    background: var(--c-1st);
+    outline: 1px solid hsl(0, 0%, 100%);
+    border-radius: 25%;
+}
+input[type = range]::-moz-range-thumb {
+    cursor: pointer;
+    width: 0.5rem;
+    height: 1rem;
+    background: var(--c-1st);
+    outline: 1px solid hsl(0, 0%, 100%);
+    border-radius: 25%;
+}
+
+
+
+
+#bgLinearGradient {
+    width: 100vw;
+    height: 100vh;
+
+    position: fixed;
+    top: 0;
+    z-index: -1;
+
+    --fraction-one: 50%;
+    --fraction-two: 50%;
+    --c-one: var(--c-2nd);
+    --c-two: var(--c-2nd);
+    --c-three: var(--c-2nd);
+    --shiness: 1;
+}
+#bgTop,
+#bgBottom {
+    width: 100%;
+    height: 50%;
+}
+#bgTop {
+    height: var(--fraction-one);
+    --direction: 180deg;
+    background: linear-gradient(var(--direction), var(--c-one) 0% , var(--c-two) 100%);
+}
+#bgBottom {
+    height: var(--fraction-two);
+    --direction: 180deg;
+    background: linear-gradient(var(--direction), var(--c-two) 0% , var(--c-three) 100%);
+}
+body {
+    text-align: center;
+    color: var(--c-1st);
+    
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+
+
+    --url: url("");
+    --repeat: no-repeat;
+    --horizontal: 50%;
+    --vertical: 50%;
+}
+.bodyBgImage {
+    background-image: var(--url);
+    background-repeat: var(--repeat);
+    background-position: var(--horizontal) var(--vertical);
+    --gg: url('./img/Cover.jpg');
+}
+
+
+
+
+nav {
+    justify-self: end;
+}
+nav #settingsStyleButton {
+    --pad: clamp(2.4rem, 3.5vw, 6.4rem);
+    padding: var(--pad) var(--pad) 0 0;
+    background-color: transparent;
+}
+
+
+
+
+fieldset {
+    padding: var(--settings-gap);
+    border-radius: 25%;
+    border: 2px solid var(--c-1st);
+}
+fieldset legend {
+    font-family: var(--ff-settings);
+    font-weight: 700;
+    font-size: var(--fs-settings);
+}
+label,
+input {
+    font-family: var(--ff-settings);
+    font-size: var(--fs-settings);
+    color: var(--c-1st);
+}
+fieldset #imageSourceControls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+fieldset #imageSourceControls input[type = button] {
+    width: fit-content;
+    border: none;
+    border-radius: 20%;
+    padding: 0.2rem 2rem;
+    font-size: calc( var(--fs-settings) * 0.83 );
+    background-color: var(--button-bgc);
+}
+#bgImage,
+fieldset fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
+}
+.inputWrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2.4rem;
+}
+.inputWrapper input {
+    height: 0.5rem;
+    background-color: var(--c-2nd);
+    border: 1px solid var(--c-1st);
+}
+.inputWrapper input[type = text] {
+    height: 2rem;
+}
+
+
+
+
+#style {
+    width: fit-content;
+    margin: auto;
+    padding-bottom: var(--settings-gap);
+    
+    font-size: 1.6rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--settings-gap);
+}
+#style {
+    display: none;
+}
+
+
+
+
+#linearGradient {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--settings-gap);
+}
+#linearGradient #display {
+    display: flex;
+    align-items: center;
+    gap: var(--settings-gap);
+}
+#linearGradient #pickers {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--settings-gap);
+}
+#linearGradient #areas::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: white;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+#linearGradient #areas {
+    width: 20rem;
+    height: 15rem;
+    background: linear-gradient(180deg, var(--c-2nd) 0% , var(--c-2nd) 50%);
+
+    display: grid;
+    --one: 10fr;
+    --two: 10fr;
+    grid-template-rows: var(--one) var(--two);
+
+    position: relative;
+}
+#linearGradient #areas .area {
+    --hue: 180;
+    --saturation: 100%;
+    --lightness: 100%;
+    --alpha: 100%;
+    --color: hsla(var(--hue), var(--saturation), var(--lightness), var(--alpha));
+
+    width: 100%;
+    border: 1px solid var(--c-1st);
+
+    position: relative;
+}
+#linearGradient #areas .area:hover {
+    outline: 2px solid var(--c-2nd);
+    cursor: pointer;
+}
+#areas .three {
+    display: none;
+}
+
+
+
+
+.colorPicker {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+}
+.colorPicker .huePicker {
+    width: 100%;
+    height: 0.8rem;
+    position: relative;
+}
+.colorPicker .huePicker img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.colorPicker .huePicker input {
+    width: 100%;
+    background-color: transparent;
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+.colorPicker input {
+    border-radius: 0;
+    width: 100%;
+}
+.colorPicker .saturation {
+    background: linear-gradient(90deg, black 0% , white 100%);
+}
+.colorPicker .lightness {
+    position: relative;
+    background-color: transparent;
+    --hue: 180;
+    --saturation: 50%;
+    --color: hsl(var(--hue), var(--saturation), 50%);
+}
+.colorPicker .lightness::before,
+.colorPicker .lightness::after {
+    content: '';
+    width: 50%;
+    height: 100%;
+    background:  linear-gradient(90deg, black 0% , var(--color) 100%);
+
+    position: absolute;
+    z-index: -1; 
+}
+.colorPicker .lightness::after {
+    right: 0;
+    background:  linear-gradient(90deg, var(--color)  0% , white 100%);
+}
+.colorPicker .alpha {
+    --color: var(--c-1st);
+    background: linear-gradient(90deg, white 0% , black 100%);
+}
+.colorPicker .shiness {
+    height: 0.5rem;
+    border: 1px solid var(--c-1st);
+}
+
+
+
+
+.checkboxWrapper {
+    position: relative;
+    padding: 0.2rem 0;
+}
+.checkboxWrapper input {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    opacity: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+}
+.checkboxWrapper label::before {
+    content: '';
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 0.6rem;
+    border: 1px solid var(--c-1st);
+    background-color: var(--c-2nd);
+
+    display: inline-block;
+}
+.checkboxWrapper label {
+    display: flex;
+    align-items: center;
+    gap: var(--br);
+}
+.checkboxWrapper:focus-within label::before,
+.checkboxWrapper input:hover + label::before {
+    outline: 2px solid var(--c-1st);
+}
+.checkboxWrapper input:checked + label::before {
+    background-image: url("data:image/svg+xml,%3Csvg width='18' height='14' viewBox='0 0 18 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 11.17L1.83 7L0.410004 8.41L6 14L18 2L16.59 0.589996L6 11.17Z' fill='%2342D3FF'/%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+
+
+
+#darkMode {
+    width: 20rem;
+    display: flex;
+    justify-content: space-around;
+}
+#darkMode button {
+    background-color: transparent;
+}
+
+
+
+
+
+main {
+    align-self: center;
+    justify-self: center;
+
+    display: flex;
+    align-items: center;
+    gap: clamp(12.6rem, 19.2vw, 19.2rem);
+
+    width: fit-content;
+}
+main svg {
+    --ideal-width: 3.9vw;
+    --original-width: 50px;
+    --clamp-width: clamp( calc( var(--original-width) * 0.66 ), var(--ideal-width), var(--original-width));
+}
+
+
+
+
+#timer {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 1.6rem;
+} 
+
+#timer #time {
+    font-family: var(--ff);
+    font-weight: 500;
+
+    font-size: clamp(8.3rem, 12.6vw, 12.6rem);
+    line-height: clamp(9.7rem, 14.8vw, 14.8rem);
+
+    display: flex;
+    justify-content: center;
+}
+
+#timer #controls {
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    gap: clamp(2.64rem, 4vw , 4rem);
+}
+#timer #controls button {
+    background-color: transparent;
+}
+
+
+
+
+#soundControls {
+    display: grid;
+    gap: clamp(2.1rem, 3.2vw, 3.2rem);
+    grid-template-columns: 1fr 1fr;
+}
+
+#soundControls button {
+    background-color: var(--button-bgc);
+
+    width: clamp(9.1rem , 13.8vw, 13.8rem);
+    height: clamp(10rem, 15.2vw, 15.2rem);
+    padding: 0 clamp(1.5rem, 2.4vw, 2.4rem);
+    border-radius: var(--br);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#soundControls button input {
+    --progress: 50%;
+    opacity: 0.75;
+    background: linear-gradient(90deg, var(--c-1st) var(--progress) , var(--c-2nd) var(--progress));
+
+    height: 0.4rem;
+    width: 100%;
+    border-radius: var(--br);
+
+    margin-bottom: 0.8rem;
+}
+#soundControls button input::-webkit-slider-thumb {
+    background: var(--c-1st);
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: 50%;
+    outline: none;
+}
+#soundControls button input::-moz-range-thumb {
+    background: var(--c-1st);
+    height: 1.6rem;
+    width: 1.6rem;
+    border-radius: 50%;
+    outline: none;
+}
+
+
+
+/*
+When the screen witdh is <= 700px, reset everything to the orignal size; and only start to adjust the main Page when it's equal or smaller than 500px.
+*/
+@media (max-width: 700px) {
+    main {
+        flex-direction: column;
+        gap: 6.4rem;
+        padding-bottom: 6.4rem;
+    }
+    #timer #time {
+        font-size: clamp(8.3rem, 25.2vw, 12.6rem);
+        line-height: clamp(9.7rem, 29.6vw, 14.8rem);
+    }
+    #timer #controls {
+        gap: clamp(2.64rem, 8vw , 4rem);
+    }
+    #soundControls {
+        gap: clamp(2.1rem, 6.4vw, 3.2rem);
+    }
+    #soundControls button {
+        width: clamp(9.1rem , 27.6vw, 13.8rem);
+        height: clamp(10rem, 30.4vw, 15.2rem);
+        padding: 0 clamp(1.5rem, 4.8vw, 2.4rem);
+    }
+}
+/*
+start to adjust the settings Page when it's equal or smaller than 550px.
+*/
+@media (max-width: 550px) {
+    :root {
+        --fs-settings: clamp(1.6rem, 4.4vw, 2.4rem);
+        --settings-gap: clamp(2rem, 6.55vw, 3.6rem);
+    }
+
+    #linearGradient #display {
+        flex-direction: column;
+    }
+    
+}
+
+@media (orientation: portrait) {
+    #linearGradient #areas {
+        width: 15rem;
+        height: 20rem;
+    }
+}
